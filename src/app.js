@@ -301,7 +301,7 @@ class DocsApp {
             content.innerHTML = sanitizedHtml;
 
             // Apply Dream language syntax highlighting
-            //this.highlightDreamCode();
+            this.highlightDreamCode();
 
             // Add copy buttons to code blocks
             this.addCopyButtons();
