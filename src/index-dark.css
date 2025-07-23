@@ -43,4 +43,73 @@ body {
 .main-content pre code {
     text-shadow: none;
     font-weight: normal;
+    color: var(--text-primary) !important;
+}
+
+/* Override any external CSS that might be setting code text to black */
+.main-content pre,
+.main-content code {
+    color: var(--text-primary) !important;
+}
+
+/* Ensure Prism.js syntax highlighting works with dark theme */
+.main-content pre[class*="language-"] code,
+.main-content pre[class*="language-"] {
+    color: var(--text-primary) !important;
+}
+
+/* Override any token colors that might be too dark for dark mode */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: var(--text-muted) !important;
+}
+
+.token.punctuation {
+    color: var(--text-primary) !important;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+    color: var(--syntax-number) !important;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: var(--syntax-string) !important;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+    color: var(--text-primary) !important;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: var(--accent-primary) !important;
+}
+
+.token.function,
+.token.class-name {
+    color: var(--syntax-function) !important;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+    color: var(--accent-secondary) !important;
 }
