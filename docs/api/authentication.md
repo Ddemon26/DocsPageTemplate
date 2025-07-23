@@ -1,514 +1,381 @@
-# Authentication
+# API Authentication
 
-Learn how to add authentication and access control to your documentation site.
+Learn how to authenticate with the Your Project Name API to access protected resources.
 
 ## Overview
 
-While the basic documentation site is public, you may want to add authentication for:
+The Your Project Name API uses API keys for authentication. This secure method ensures that only authorized applications can access your data and perform operations on your behalf.
 
-- Private documentation
-- User-specific content
-- Analytics and tracking
-- Content personalization
+## Authentication Methods
 
-## Basic Authentication
+### API Key Authentication (Recommended)
 
-### Simple Password Protection
+API keys are the primary authentication method for the Your Project Name API. They provide secure, token-based access to your resources.
 
-Add basic password protection with JavaScript:
+### OAuth 2.0 (Coming Soon)
+
+OAuth 2.0 support is planned for future releases, enabling more granular permission control and third-party integrations.
+
+## Getting Your API Key
+
+### Step 1: Access the Dashboard
+
+1. Visit the [Your Project Name Dashboard](https://dashboard.yourproject.com)
+2. Sign in to your account or create a new one
+3. Complete email verification if prompted
+
+### Step 2: Generate API Key
+
+1. Navigate to **Settings** → **API Keys**
+2. Click **"Create New API Key"**
+3. Enter a descriptive name (e.g., "Production App", "Development")
+4. Select the required permissions/scopes
+5. Click **"Generate Key"**
+
+⚠️ **Important**: Copy and store your API key immediately. It will only be displayed once for security reasons.
+
+## Using Your API Key
+
+### HTTP Header Authentication
+
+Include your API key in the `Authorization` header:
+
+```http
+GET /api/v1/users HTTP/1.1
+Host: https://api.yourproject.com
+Authorization: Bearer YOUR_API_KEY_HERE
+Content-Type: application/json
+```
+
+### Code Examples
+
+**JavaScript/Node.js:**
+```javascript
+const apiKey = process.env.Your Project Name_API_KEY;
+
+const response = await fetch('https://api.yourproject.com/v1/users', {
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+    }
+});
+
+const data = await response.json();
+console.log(data);
+```
+
+**Python:**
+```python
+import os
+import requests
+
+api_key = os.getenv('Your Project Name_API_KEY')
+headers = {
+    'Authorization': f'Bearer {api_key}',
+    'Content-Type': 'application/json'
+}
+
+response = requests.get('https://api.yourproject.com/v1/users', headers=headers)
+data = response.json()
+print(data)
+```
+
+**cURL:**
+```bash
+curl -X GET \
+  https://api.yourproject.com/v1/users \
+  -H 'Authorization: Bearer YOUR_API_KEY_HERE' \
+  -H 'Content-Type: application/json'
+```
+
+**PHP:**
+```php
+<?php
+$apiKey = getenv('Your Project Name_API_KEY');
+$headers = [
+    'Authorization: Bearer ' . $apiKey,
+    'Content-Type: application/json'
+];
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://api.yourproject.com/v1/users');
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+$data = json_decode($response, true);
+curl_close($ch);
+?>
+```
+
+## API Key Permissions
+
+API keys support granular permissions to follow the principle of least privilege:
+
+| Permission | Description | Allowed Operations |
+|------------|-------------|-------------------|
+| `read` | Read-only access | GET requests only |
+| `write` | Create and update | GET, POST, PUT, PATCH |
+| `delete` | Delete resources | All HTTP methods |
+| `admin` | Full access | All operations + admin functions |
+
+### Permission Examples
+
+**Read-only API key:**
+```javascript
+// ✅ Allowed operations
+await fetch('https://api.yourproject.com/v1/users');           // GET
+await fetch('https://api.yourproject.com/v1/projects');        // GET
+
+// ❌ Forbidden operations
+await fetch('https://api.yourproject.com/v1/users', {          // POST
+    method: 'POST',
+    body: JSON.stringify({name: 'John'})
+});
+```
+
+**Write-enabled API key:**
+```javascript
+// ✅ Allowed operations
+await fetch('https://api.yourproject.com/v1/users');           // GET
+await fetch('https://api.yourproject.com/v1/users', {          // POST
+    method: 'POST',
+    body: JSON.stringify({name: 'John'})
+});
+
+// ❌ Forbidden operations
+await fetch('https://api.yourproject.com/v1/users/123', {      // DELETE
+    method: 'DELETE'
+});
+```
+
+## Security Best Practices
+
+### 1. Environment Variables
+
+Never hardcode API keys in your source code:
 
 ```javascript
-class AuthenticatedDocsApp extends DocsApp {
-    constructor() {
-        super();
-        this.isAuthenticated = false;
-        this.checkAuthentication();
-    }
-    
-    checkAuthentication() {
-        const token = localStorage.getItem('docs-auth-token');
-        if (!token || !this.validateToken(token)) {
-            this.showLoginForm();
-            return;
-        }
-        this.isAuthenticated = true;
-    }
-    
-    showLoginForm() {
-        const content = document.getElementById('content');
-        content.innerHTML = `
-            <div class="auth-form">
-                <h2>Authentication Required</h2>
-                <form onsubmit="app.authenticate(event)">
-                    <input type="password" id="password" placeholder="Enter password" required>
-                    <button type="submit">Access Documentation</button>
-                </form>
-            </div>
-        `;
-    }
-    
-    authenticate(event) {
-        event.preventDefault();
-        const password = document.getElementById('password').value;
-        
-        if (this.validatePassword(password)) {
-            const token = this.generateToken();
-            localStorage.setItem('docs-auth-token', token);
-            this.isAuthenticated = true;
-            this.initializeApp();
-        } else {
-            alert('Invalid password');
-        }
-    }
-    
-    validatePassword(password) {
-        // Simple password check - use environment variables in production
-        return password === 'your-secret-password';
-    }
-    
-    generateToken() {
-        return btoa(Date.now() + Math.random());
-    }
-    
-    validateToken(token) {
-        // Add token validation logic
-        return token && token.length > 0;
+// ✅ Secure - using environment variables
+const apiKey = process.env.Your Project Name_API_KEY;
+
+// ❌ Insecure - hardcoded key
+const apiKey = 'sk-1234567890abcdef';
+```
+
+### 2. Key Rotation
+
+Regularly rotate your API keys:
+
+1. Generate a new API key with the same permissions
+2. Update your applications to use the new key
+3. Test thoroughly in a staging environment
+4. Deploy to production
+5. Revoke the old API key
+
+### 3. Monitoring and Alerts
+
+Monitor your API usage:
+
+- Set up alerts for unusual activity patterns
+- Review API access logs regularly
+- Monitor rate limit usage
+- Track failed authentication attempts
+
+### 4. Network Security
+
+- Use HTTPS for all API requests
+- Implement IP whitelisting when possible
+- Use VPN or private networks for sensitive operations
+
+## Error Handling
+
+### Common Error Responses
+
+**Invalid API Key (401):**
+```json
+{
+    "error": {
+        "code": "INVALID_API_KEY",
+        "message": "The provided API key is invalid or has been revoked",
+        "details": "Please check your API key and try again"
     }
 }
 ```
 
-### Environment-Based Authentication
-
-Use different authentication methods based on environment:
-
-```javascript
-class ConfigurableAuth {
-    constructor() {
-        this.authMethod = this.getAuthMethod();
-    }
-    
-    getAuthMethod() {
-        // Check if running on GitHub Pages
-        if (window.location.hostname.includes('github.io')) {
-            return 'github';
-        }
-        
-        // Check for custom domain
-        if (window.location.hostname === 'docs.yourcompany.com') {
-            return 'oauth';
-        }
-        
-        // Default to no auth for localhost
-        return 'none';
-    }
-    
-    async authenticate() {
-        switch (this.authMethod) {
-            case 'github':
-                return await this.githubAuth();
-            case 'oauth':
-                return await this.oauthAuth();
-            default:
-                return true; // No auth required
-        }
+**Insufficient Permissions (403):**
+```json
+{
+    "error": {
+        "code": "INSUFFICIENT_PERMISSIONS",
+        "message": "Your API key does not have permission to perform this action",
+        "required_permission": "write",
+        "current_permissions": ["read"]
     }
 }
 ```
 
-## OAuth Integration
+**Rate Limit Exceeded (429):**
+```json
+{
+    "error": {
+        "code": "RATE_LIMIT_EXCEEDED",
+        "message": "API rate limit exceeded",
+        "retry_after": 60,
+        "limit": 1000,
+        "remaining": 0,
+        "reset": 1640995200
+    }
+}
+```
 
-### GitHub OAuth
-
-Integrate with GitHub for user authentication:
+### Error Handling Example
 
 ```javascript
-class GitHubAuth {
-    constructor(clientId) {
-        this.clientId = clientId;
-        this.redirectUri = window.location.origin;
-    }
-    
-    login() {
-        const authUrl = `https://github.com/login/oauth/authorize?` +
-            `client_id=${this.clientId}&` +
-            `redirect_uri=${encodeURIComponent(this.redirectUri)}&` +
-            `scope=user:email`;
-        
-        window.location.href = authUrl;
-    }
-    
-    async handleCallback() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-        
-        if (code) {
-            try {
-                const token = await this.exchangeCodeForToken(code);
-                const user = await this.getUserInfo(token);
-                this.storeUserSession(user, token);
-                return user;
-            } catch (error) {
-                console.error('Authentication failed:', error);
-                return null;
+async function makeApiRequest(endpoint) {
+    try {
+        const response = await fetch(`https://api.yourproject.com${endpoint}`, {
+            headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            
+            switch (response.status) {
+                case 401:
+                    throw new Error('Invalid API key. Please check your credentials.');
+                case 403:
+                    throw new Error(`Insufficient permissions: ${error.error.message}`);
+                case 429:
+                    throw new Error(`Rate limit exceeded. Retry after ${error.error.retry_after} seconds.`);
+                default:
+                    throw new Error(`API error: ${error.error.message}`);
             }
         }
-        return null;
-    }
-    
-    async exchangeCodeForToken(code) {
-        // This would typically be done on your backend
-        // For client-side only, you'd need a proxy service
-        const response = await fetch('/api/auth/github', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ code })
-        });
-        
-        const data = await response.json();
-        return data.access_token;
-    }
-    
-    async getUserInfo(token) {
-        const response = await fetch('https://api.github.com/user', {
-            headers: { 'Authorization': `token ${token}` }
-        });
+
         return await response.json();
-    }
-    
-    storeUserSession(user, token) {
-        localStorage.setItem('github-user', JSON.stringify(user));
-        localStorage.setItem('github-token', token);
+    } catch (error) {
+        console.error('API request failed:', error.message);
+        throw error;
     }
 }
 ```
 
-### Google OAuth
+## Testing Your Authentication
 
-Integrate with Google for authentication:
+### Health Check Endpoint
 
-```html
-<!-- Add Google OAuth script -->
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+Test your API key with the health check endpoint:
+
+```http
+GET /api/v1/auth/verify
+Authorization: Bearer YOUR_API_KEY_HERE
 ```
 
-```javascript
-class GoogleAuth {
-    constructor(clientId) {
-        this.clientId = clientId;
-        this.initializeGoogleAuth();
-    }
-    
-    initializeGoogleAuth() {
-        window.onload = () => {
-            google.accounts.id.initialize({
-                client_id: this.clientId,
-                callback: this.handleCredentialResponse.bind(this)
-            });
-            
-            google.accounts.id.renderButton(
-                document.getElementById('google-signin'),
-                { theme: 'outline', size: 'large' }
-            );
-        };
-    }
-    
-    handleCredentialResponse(response) {
-        const credential = this.parseJwt(response.credential);
-        this.storeUserSession(credential);
-        this.onAuthSuccess(credential);
-    }
-    
-    parseJwt(token) {
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-        
-        return JSON.parse(jsonPayload);
-    }
-    
-    storeUserSession(user) {
-        localStorage.setItem('google-user', JSON.stringify(user));
-    }
-    
-    onAuthSuccess(user) {
-        console.log('Authenticated user:', user);
-        // Initialize the documentation app
-        this.initializeDocsApp();
+**Successful Response:**
+```json
+{
+    "success": true,
+    "data": {
+        "authenticated": true,
+        "key_id": "key_abc123",
+        "permissions": ["read", "write"],
+        "rate_limit": {
+            "limit": 1000,
+            "remaining": 999,
+            "reset": 1640995200
+        },
+        "user": {
+            "id": "user_123",
+            "email": "user@example.com"
+        }
     }
 }
 ```
 
-## Role-Based Access
-
-### User Roles
-
-Implement role-based access control:
+### Test Script
 
 ```javascript
-class RoleBasedAuth {
-    constructor() {
-        this.userRoles = new Map();
-        this.pagePermissions = new Map();
-        this.loadPermissions();
-    }
+async function testAuthentication() {
+    const apiKey = process.env.Your Project Name_API_KEY;
     
-    loadPermissions() {
-        // Define page permissions
-        this.pagePermissions.set('docs/admin/', ['admin']);
-        this.pagePermissions.set('docs/internal/', ['admin', 'employee']);
-        this.pagePermissions.set('docs/public/', ['admin', 'employee', 'user']);
+    if (!apiKey) {
+        console.error('❌ API key not found in environment variables');
+        return;
     }
-    
-    hasAccess(userRoles, pagePath) {
-        const requiredRoles = this.getRequiredRoles(pagePath);
-        if (!requiredRoles.length) return true; // Public page
-        
-        return requiredRoles.some(role => userRoles.includes(role));
-    }
-    
-    getRequiredRoles(pagePath) {
-        for (const [path, roles] of this.pagePermissions) {
-            if (pagePath.startsWith(path)) {
-                return roles;
+
+    try {
+        const response = await fetch('https://api.yourproject.com/v1/auth/verify', {
+            headers: {
+                'Authorization': `Bearer ${apiKey}`
             }
-        }
-        return []; // No specific permissions required
-    }
-    
-    filterNavigation(navigation, userRoles) {
-        return navigation.map(section => ({
-            ...section,
-            items: section.items.filter(item => 
-                this.hasAccess(userRoles, item.path)
-            )
-        })).filter(section => section.items.length > 0);
-    }
-}
-```
-
-### Permission Checking
-
-Add permission checks to the main app:
-
-```javascript
-class SecureDocsApp extends DocsApp {
-    constructor() {
-        super();
-        this.auth = new RoleBasedAuth();
-        this.currentUser = this.getCurrentUser();
-    }
-    
-    async loadDoc(path) {
-        // Check permissions before loading
-        if (!this.auth.hasAccess(this.currentUser.roles, path)) {
-            this.showAccessDenied(path);
-            return;
-        }
-        
-        // Proceed with normal loading
-        await super.loadDoc(path);
-    }
-    
-    showAccessDenied(path) {
-        const content = document.getElementById('content');
-        content.innerHTML = `
-            <div class="error">
-                <h1>Access Denied</h1>
-                <p>You don't have permission to view: ${path}</p>
-                <p>Required roles: ${this.auth.getRequiredRoles(path).join(', ')}</p>
-                <p>Your roles: ${this.currentUser.roles.join(', ')}</p>
-            </div>
-        `;
-    }
-    
-    getCurrentUser() {
-        const userData = localStorage.getItem('user-session');
-        return userData ? JSON.parse(userData) : { roles: ['anonymous'] };
-    }
-    
-    renderNavigation() {
-        // Filter navigation based on user permissions
-        const filteredNavigation = this.auth.filterNavigation(
-            this.navigation, 
-            this.currentUser.roles
-        );
-        
-        // Render filtered navigation
-        this.renderFilteredNavigation(filteredNavigation);
-    }
-}
-```
-
-## Session Management
-
-### Session Storage
-
-Manage user sessions securely:
-
-```javascript
-class SessionManager {
-    constructor() {
-        this.sessionKey = 'docs-session';
-        this.sessionTimeout = 24 * 60 * 60 * 1000; // 24 hours
-    }
-    
-    createSession(user, token) {
-        const session = {
-            user,
-            token,
-            createdAt: Date.now(),
-            expiresAt: Date.now() + this.sessionTimeout
-        };
-        
-        localStorage.setItem(this.sessionKey, JSON.stringify(session));
-        return session;
-    }
-    
-    getSession() {
-        const sessionData = localStorage.getItem(this.sessionKey);
-        if (!sessionData) return null;
-        
-        const session = JSON.parse(sessionData);
-        
-        // Check if session is expired
-        if (Date.now() > session.expiresAt) {
-            this.clearSession();
-            return null;
-        }
-        
-        return session;
-    }
-    
-    refreshSession() {
-        const session = this.getSession();
-        if (session) {
-            session.expiresAt = Date.now() + this.sessionTimeout;
-            localStorage.setItem(this.sessionKey, JSON.stringify(session));
-        }
-    }
-    
-    clearSession() {
-        localStorage.removeItem(this.sessionKey);
-    }
-    
-    isAuthenticated() {
-        return this.getSession() !== null;
-    }
-}
-```
-
-### Auto-logout
-
-Implement automatic logout on inactivity:
-
-```javascript
-class ActivityTracker {
-    constructor(timeoutMinutes = 30) {
-        this.timeout = timeoutMinutes * 60 * 1000;
-        this.lastActivity = Date.now();
-        this.warningShown = false;
-        
-        this.setupActivityListeners();
-        this.startInactivityTimer();
-    }
-    
-    setupActivityListeners() {
-        const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
-        
-        events.forEach(event => {
-            document.addEventListener(event, () => {
-                this.updateActivity();
-            }, true);
         });
-    }
-    
-    updateActivity() {
-        this.lastActivity = Date.now();
-        this.warningShown = false;
-    }
-    
-    startInactivityTimer() {
-        setInterval(() => {
-            const inactiveTime = Date.now() - this.lastActivity;
-            
-            // Show warning at 5 minutes before timeout
-            if (inactiveTime > this.timeout - 5 * 60 * 1000 && !this.warningShown) {
-                this.showInactivityWarning();
-                this.warningShown = true;
-            }
-            
-            // Logout on timeout
-            if (inactiveTime > this.timeout) {
-                this.handleInactivityLogout();
-            }
-        }, 60000); // Check every minute
-    }
-    
-    showInactivityWarning() {
-        if (confirm('You will be logged out in 5 minutes due to inactivity. Click OK to stay logged in.')) {
-            this.updateActivity();
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('✅ Authentication successful!');
+            console.log(`   Key ID: ${data.data.key_id}`);
+            console.log(`   Permissions: ${data.data.permissions.join(', ')}`);
+            console.log(`   Rate limit: ${data.data.rate_limit.remaining}/${data.data.rate_limit.limit}`);
+        } else {
+            const error = await response.json();
+            console.error('❌ Authentication failed:', error.error.message);
         }
-    }
-    
-    handleInactivityLogout() {
-        alert('You have been logged out due to inactivity.');
-        sessionManager.clearSession();
-        window.location.reload();
+    } catch (error) {
+        console.error('❌ Request failed:', error.message);
     }
 }
+
+// Run the test
+testAuthentication();
 ```
 
-## Security Considerations
+## Troubleshooting
 
-### Best Practices
+### Common Issues
 
-1. **Never store sensitive data in localStorage**
-   ```javascript
-   // Bad
-   localStorage.setItem('password', password);
-   
-   // Good
-   localStorage.setItem('session-token', hashedToken);
-   ```
+**"Invalid API Key" Error:**
+- Verify the API key is copied correctly (no extra spaces)
+- Check that the key hasn't been revoked in the dashboard
+- Ensure you're using the correct API base URL
 
-2. **Validate tokens server-side**
-   ```javascript
-   async validateToken(token) {
-       const response = await fetch('/api/validate-token', {
-           method: 'POST',
-           headers: { 'Authorization': `Bearer ${token}` }
-       });
-       return response.ok;
-   }
-   ```
+**"Insufficient Permissions" Error:**
+- Review your API key's permissions in the dashboard
+- Generate a new key with the required permissions
+- Contact support if you need access to restricted endpoints
 
-3. **Use HTTPS in production**
-   ```javascript
-   if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
-       location.replace(`https:${location.href.substring(location.protocol.length)}`);
-   }
-   ```
+**Rate Limiting Issues:**
+- Implement exponential backoff in your retry logic
+- Cache API responses when possible
+- Consider upgrading your plan for higher rate limits
+- Distribute requests across multiple API keys if allowed
 
-4. **Implement CSRF protection**
-   ```javascript
-   const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-   
-   fetch('/api/endpoint', {
-       method: 'POST',
-       headers: {
-           'X-CSRF-Token': csrfToken,
-           'Content-Type': 'application/json'
-       },
-       body: JSON.stringify(data)
-   });
-   ```
+**Network/Connection Issues:**
+- Verify your internet connection
+- Check if your firewall allows outbound HTTPS connections
+- Test with a simple cURL command first
+
+### Getting Help
+
+If you're still having issues:
+
+1. Check the [API Status Page](https://yourproject.com/status)
+2. Review our [troubleshooting guide](../guides/troubleshooting.md)
+3. Search [existing issues](https://github.com/yourusername/yourproject/issues)
+4. Join our [community chat](../community/chat.md)
+5. [Contact support](mailto:your.email@example.com)
 
 ## Next Steps
 
-- Implement your chosen authentication method
-- Set up proper session management
-- Configure role-based access control
-- Test security measures thoroughly
-- Consider using a backend service for production authentication
+- **[API Overview](overview.md)** - Learn about available endpoints
+- **[Rate Limiting](overview.md#rate-limiting)** - Understand API limits
+- **[SDKs and Libraries](../guides/sdks.md)** - Use official client libraries
+- **[Examples](../examples/)** - See real-world usage examples
+
+---
+
+*Keep your API keys secure and never share them publicly. For additional security questions, contact [your.email@example.com](mailto:your.email@example.com).*

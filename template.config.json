@@ -1,0 +1,89 @@
+{
+  "name": "DocsPage Template",
+  "version": "1.0.0",
+  "description": "A modern, responsive documentation template with search, navigation, and theming",
+  "author": "Template Author",
+  "variables": {
+    "PROJECT_NAME": "Your Project Name",
+    "PROJECT_DESCRIPTION": "A brief description of what your project does and why it's useful",
+    "PROJECT_LOGO": "🚀",
+    "PROJECT_LOGO_TEXT": "Your Project",
+    "SITE_TITLE": "Your Project Documentation",
+    "GITHUB_URL": "https://github.com/yourusername/yourproject",
+    "GITHUB_USERNAME": "yourusername",
+    "GITHUB_REPO": "yourproject",
+    "PROJECT_URL": "https://yourproject.com",
+    "API_BASE_URL": "https://api.yourproject.com",
+    "DASHBOARD_URL": "https://dashboard.yourproject.com",
+    "PRIMARY_COLOR": "#007acc",
+    "SECONDARY_COLOR": "#f8f9fa",
+    "ACCENT_COLOR": "#28a745",
+    "AUTHOR_NAME": "Your Name",
+    "AUTHOR_EMAIL": "your.email@example.com",
+    "LICENSE": "MIT",
+    "VERSION": "1.0.0",
+    "PACKAGE_MANAGER": "npm",
+    "INSTALL_COMMAND": "npm install your-project-name",
+    "RUN_COMMAND": "npx your-project-name",
+    "MAIN_LANGUAGE": "JavaScript",
+    "RUNTIME_REQUIREMENT": "Node.js 16+",
+    "MIN_MEMORY": "4GB",
+    "MIN_STORAGE": "100MB"
+  },
+  "placeholders": {
+    "docs": {
+      "introduction.md": "Project introduction and overview - explain what your project does and why it's useful",
+      "installation.md": "Installation and setup instructions for your project across different platforms",
+      "quick-start.md": "Quick start guide to get users up and running in minutes",
+      "api/overview.md": "API documentation overview and getting started with your API",
+      "api/authentication.md": "API authentication methods, examples, and security best practices",
+      "api/endpoints.md": "Detailed API endpoint documentation with request/response examples",
+      "guides/basic-usage.md": "Basic usage patterns, examples, and common workflows",
+      "guides/configuration.md": "Configuration options, settings, and customization guide",
+      "guides/advanced-features.md": "Advanced features, power-user tips, and complex use cases",
+      "guides/troubleshooting.md": "Common issues, solutions, and debugging guide",
+      "examples/index.md": "Code examples, sample projects, and implementation patterns",
+      "community/contributing.md": "How to contribute to the project, development setup, and guidelines",
+      "community/support.md": "Support channels, community resources, and getting help"
+    }
+  },
+  "setup": {
+    "steps": [
+      "1. Copy this template to your project directory",
+      "2. Edit template.config.json with your project details",
+      "3. Run 'node setup.js' to apply variables to all files",
+      "4. Update docs/navigation.json with your documentation structure",
+      "5. Replace placeholder content in docs/ folder with your actual documentation",
+      "6. Customize branding and colors in template.config.json",
+      "7. Test locally by opening index.html in your browser or using a local server",
+      "8. Deploy to GitHub Pages, Netlify, Vercel, or your preferred hosting platform"
+    ],
+    "post_setup": [
+      "- Remove template.config.json and setup.js if desired",
+      "- Update .gitignore to exclude any build artifacts",
+      "- Set up automated deployment if using CI/CD",
+      "- Configure custom domain if needed"
+    ]
+  },
+  "files_to_process": [
+    "index.html",
+    "README.md",
+    "docs/**/*.md",
+    "src/**/*.js",
+    "src/**/*.css"
+  ],
+  "template_info": {
+    "created": "2024",
+    "last_updated": "2024",
+    "features": [
+      "Responsive design",
+      "Dark/light theme toggle",
+      "Full-text search",
+      "Markdown rendering",
+      "Syntax highlighting",
+      "Table of contents",
+      "Breadcrumb navigation",
+      "GitHub Pages ready"
+    ]
+  }
+}

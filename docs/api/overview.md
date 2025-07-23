@@ -1,317 +1,211 @@
-# API Overview
+# API Reference Overview
 
-Complete reference for the Documentation Site API and JavaScript methods.
+Complete API documentation for Your Project Name.
 
-## Core Classes
+## Introduction
 
-### DocsApp
+This section provides comprehensive documentation for all Your Project Name APIs, including methods, parameters, return values, and examples.
 
-The main application class that handles all documentation functionality.
+## Getting Started with the API
 
-```javascript
-const app = new DocsApp();
+### Authentication
+
+Before using the API, you'll need to authenticate. See the [Authentication Guide](authentication.md) for details.
+
+### Base URL
+
+```
+https://api.example.com/v1
 ```
 
-#### Constructor
+### Response Format
 
-Creates a new instance of the documentation application.
-
-**Parameters:** None
-
-**Example:**
-```javascript
-const app = new DocsApp();
-```
-
-#### Properties
-
-| Property | Type | Description |
-|----------|------|-------------|
-| `currentTheme` | string | Current theme ('light' or 'dark') |
-| `docs` | Map | Cache of loaded documentation content |
-| `navigation` | Array | Navigation structure from navigation.json |
-| `searchIndex` | Array | Search index for quick lookups |
-
-#### Methods
-
-##### `loadDoc(path)`
-
-Loads and renders a documentation page.
-
-**Parameters:**
-- `path` (string) - Path to the Markdown file
-
-**Returns:** Promise
-
-**Example:**
-```javascript
-await app.loadDoc('docs/introduction.md');
-```
-
-##### `loadNavigation()`
-
-Loads the navigation structure from navigation.json.
-
-**Returns:** Promise
-
-**Example:**
-```javascript
-await app.loadNavigation();
-```
-
-##### `applyTheme()`
-
-Applies the current theme to the interface.
-
-**Example:**
-```javascript
-app.currentTheme = 'dark';
-app.applyTheme();
-```
-
-## Configuration
-
-### Navigation Structure
-
-The navigation is defined in `docs/navigation.json`:
+All API responses are returned in JSON format:
 
 ```json
-[
-  {
-    "title": "Section Title",
-    "items": [
-      {
-        "title": "Page Title",
-        "path": "docs/page.md"
-      }
-    ]
-  }
-]
-```
-
-#### Navigation Item Properties
-
-| Property | Type | Required | Description |
-|----------|------|----------|-------------|
-| `title` | string | Yes | Display name for the item |
-| `path` | string | Yes | Path to the Markdown file |
-| `external` | boolean | No | Whether this is an external link |
-| `url` | string | No | External URL (if external is true) |
-
-### Theme Configuration
-
-Themes are configured through CSS custom properties:
-
-```css
-:root {
-    --bg-primary: #f5f5f5;
-    --bg-secondary: #ffffff;
-    --text-primary: #333333;
-    --accent-primary: #005566;
+{
+    "success": true,
+    "data": {
+        // Response data
+    },
+    "message": "Operation completed successfully"
 }
 ```
 
-## Events
+## Core API Methods
 
-### Custom Events
+### Method 1: getData()
 
-The application dispatches custom events for integration:
+Retrieves data from the system.
 
+**Syntax:**
 ```javascript
-// Listen for page loads
-document.addEventListener('doc-loaded', (event) => {
-    console.log('Loaded:', event.detail.path);
-});
+getData(options)
+```
 
-// Listen for theme changes
-document.addEventListener('theme-changed', (event) => {
-    console.log('Theme:', event.detail.theme);
+**Parameters:**
+- `options` (Object): Configuration options
+  - `id` (string): Unique identifier
+  - `format` (string): Response format (default: "json")
+  - `limit` (number): Maximum number of results (default: 100)
+
+**Returns:**
+- Promise that resolves to the requested data
+
+**Example:**
+```javascript
+const data = await api.getData({
+    id: "example-id",
+    format: "json",
+    limit: 50
 });
 ```
 
-### Event Types
+### Method 2: createItem()
 
-| Event | Detail | Description |
-|-------|--------|-------------|
-| `doc-loaded` | `{ path, title }` | Fired when a document is loaded |
-| `theme-changed` | `{ theme }` | Fired when theme is toggled |
-| `search-performed` | `{ query, results }` | Fired when search is executed |
+Creates a new item in the system.
 
-## Utilities
-
-### Markdown Processing
-
-The site uses marked.js for Markdown processing:
-
+**Syntax:**
 ```javascript
-// Parse Markdown
-const html = marked.parse(markdownContent);
-
-// Sanitize HTML
-const sanitizedHtml = DOMPurify.sanitize(html);
+createItem(itemData)
 ```
 
-### Search Functions
+**Parameters:**
+- `itemData` (Object): Item configuration
+  - `name` (string): Item name (required)
+  - `description` (string): Item description
+  - `tags` (Array): Array of tags
 
+**Returns:**
+- Promise that resolves to the created item
+
+**Example:**
 ```javascript
-// Build search index
-buildSearchIndex() {
-    this.searchIndex = this.navigation.flatMap(section => 
-        section.items.map(item => ({
-            title: item.title,
-            path: item.path,
-            section: section.title
-        }))
-    );
-}
-
-// Perform search
-search(query) {
-    return this.searchIndex.filter(item => 
-        item.title.toLowerCase().includes(query.toLowerCase())
-    );
-}
+const newItem = await api.createItem({
+    name: "Example Item",
+    description: "This is an example item",
+    tags: ["example", "demo"]
+});
 ```
 
-## Customization API
+### Method 3: updateItem()
 
-### Adding Custom Renderers
+Updates an existing item.
 
-Extend the Markdown renderer:
-
+**Syntax:**
 ```javascript
-// Custom renderer for callouts
-const renderer = new marked.Renderer();
-renderer.blockquote = function(quote) {
-    if (quote.startsWith('<p>Info:')) {
-        return `<div class="callout info">${quote}</div>`;
-    }
-    return `<blockquote>${quote}</blockquote>`;
-};
-
-marked.setOptions({ renderer });
+updateItem(id, updates)
 ```
 
-### Plugin System
+**Parameters:**
+- `id` (string): Item identifier (required)
+- `updates` (Object): Fields to update
 
-Add custom plugins:
+**Returns:**
+- Promise that resolves to the updated item
 
+**Example:**
 ```javascript
-class DocsPlugin {
-    constructor(app) {
-        this.app = app;
-    }
-    
-    init() {
-        // Plugin initialization
-    }
-    
-    beforeLoad(path) {
-        // Called before document load
-    }
-    
-    afterLoad(path, content) {
-        // Called after document load
-    }
-}
+const updatedItem = await api.updateItem("item-id", {
+    name: "Updated Name",
+    description: "Updated description"
+});
+```
 
-// Register plugin
-app.registerPlugin(new DocsPlugin(app));
+### Method 4: deleteItem()
+
+Deletes an item from the system.
+
+**Syntax:**
+```javascript
+deleteItem(id)
+```
+
+**Parameters:**
+- `id` (string): Item identifier (required)
+
+**Returns:**
+- Promise that resolves to deletion confirmation
+
+**Example:**
+```javascript
+const result = await api.deleteItem("item-id");
 ```
 
 ## Error Handling
 
-### Error Types
+### Error Response Format
 
-The application handles several error types:
+```json
+{
+    "success": false,
+    "error": {
+        "code": "ERROR_CODE",
+        "message": "Human-readable error message",
+        "details": {
+            // Additional error details
+        }
+    }
+}
+```
+
+### Common Error Codes
+
+| Code | Description | HTTP Status |
+|------|-------------|-------------|
+| `INVALID_REQUEST` | Request format is invalid | 400 |
+| `UNAUTHORIZED` | Authentication required | 401 |
+| `FORBIDDEN` | Insufficient permissions | 403 |
+| `NOT_FOUND` | Resource not found | 404 |
+| `RATE_LIMITED` | Too many requests | 429 |
+| `SERVER_ERROR` | Internal server error | 500 |
+
+### Error Handling Example
 
 ```javascript
 try {
-    await app.loadDoc(path);
+    const data = await api.getData({ id: "example" });
+    console.log("Success:", data);
 } catch (error) {
-    if (error.name === 'NetworkError') {
-        // Handle network issues
-    } else if (error.name === 'ParseError') {
-        // Handle Markdown parsing errors
+    if (error.code === "NOT_FOUND") {
+        console.log("Item not found");
+    } else if (error.code === "UNAUTHORIZED") {
+        console.log("Please authenticate first");
     } else {
-        // Handle other errors
+        console.error("Unexpected error:", error.message);
     }
 }
 ```
 
-### Custom Error Handling
+## Rate Limiting
 
-```javascript
-app.onError = function(error, context) {
-    console.error('Documentation error:', error);
-    
-    // Custom error reporting
-    if (window.analytics) {
-        analytics.track('documentation_error', {
-            error: error.message,
-            context: context
-        });
-    }
-};
+The API implements rate limiting to ensure fair usage:
+
+- **Rate Limit**: 1000 requests per hour per API key
+- **Burst Limit**: 100 requests per minute
+- **Headers**: Rate limit information is included in response headers
+
+```
+X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 999
+X-RateLimit-Reset: 1640995200
 ```
 
-## Performance
+## SDK and Libraries
 
-### Caching Strategy
+### Official SDKs
 
-Documents are cached in memory:
+- **JavaScript/Node.js**: `npm install Your Project Name-sdk`
+- **Python**: `pip install Your Project Name-sdk`
+- **Go**: `go get github.com/yourorg/Your Project Name-go`
 
-```javascript
-// Check cache first
-if (this.docs.has(path)) {
-    return this.docs.get(path);
-}
+### Community Libraries
 
-// Load and cache
-const content = await this.fetchDoc(path);
-this.docs.set(path, content);
-```
-
-### Lazy Loading
-
-Implement lazy loading for large sites:
-
-```javascript
-// Load navigation sections on demand
-async loadSection(sectionId) {
-    if (!this.loadedSections.has(sectionId)) {
-        const section = await this.fetchSection(sectionId);
-        this.loadedSections.set(sectionId, section);
-    }
-    return this.loadedSections.get(sectionId);
-}
-```
-
-## Browser Support
-
-### Compatibility
-
-| Feature | Chrome | Firefox | Safari | Edge |
-|---------|--------|---------|--------|------|
-| ES6 Classes | 49+ | 45+ | 10+ | 13+ |
-| Fetch API | 42+ | 39+ | 10.1+ | 14+ |
-| CSS Variables | 49+ | 31+ | 9.1+ | 16+ |
-| Local Storage | 4+ | 3.5+ | 4+ | 8+ |
-
-### Polyfills
-
-For older browser support:
-
-```html
-<!-- Fetch polyfill -->
-<script src="https://polyfill.io/v3/polyfill.min.js?features=fetch"></script>
-
-<!-- CSS Variables polyfill -->
-<script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
-```
+Check our [GitHub repository](https://github.com/yourusername/yourproject) for community-contributed libraries and tools.
 
 ## Next Steps
 
-- Learn about [Authentication](authentication.md) options
-- Explore integration examples
-- Check out the community plugins
+- Learn about [Authentication](authentication.md)
+- Explore specific API endpoints
+- Check out [code examples](../examples/)
+- Join our [community](../community/) for support

@@ -1,6 +1,6 @@
 # Quick Start
 
-Get up and running with our documentation site in just a few minutes.
+Get up and running with Your Project Name in just a few minutes.
 
 ## Prerequisites
 

@@ -1,27 +1,44 @@
-/* Base CSS Variables - Override these in theme files */
+/* Template CSS Variables - Customize these for your project */
 :root {
-    --header-bg: #2563eb;
+    /* Primary brand colors - Update these to match your project */
+    --primary-color: #007acc;
+    --secondary-color: #f8f9fa;
+    
+    /* Header styling */
+    --header-bg: var(--primary-color);
     --header-text: #ffffff;
+    
+    /* Background colors */
     --bg-primary: #ffffff;
     --bg-secondary: #f8f8f8;
     --bg-tertiary: #f0f0f0;
+    
+    /* Text colors */
     --text-primary: #000000;
     --text-secondary: #333333;
     --text-muted: #666666;
-    --accent-primary: #2563eb;
+    
+    /* Accent colors */
+    --accent-primary: var(--primary-color);
     --accent-secondary: #1d4ed8;
     --accent-light: #dbeafe;
     --accent-lighter: #eff6ff;
+    
+    /* Border and shadow colors */
     --border-primary: #cccccc;
     --border-secondary: #e0e0e0;
-    --shadow-light: rgba(0,0,0,0.1);
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    
+    /* Error states */
     --error-bg: #fff5f5;
     --error-border: #fed7d7;
     --error-text: #c53030;
     --error-text-secondary: #742a2a;
-    --theme-toggle-bg: #2563eb;
+    
+    /* Component-specific colors */
+    --theme-toggle-bg: var(--primary-color);
     --theme-toggle-text: #ffffff;
-    --sidebar-bg: #f8f8f8;
+    --sidebar-bg: var(--secondary-color);
     --toc-bg: #ffffff;
 }
 
@@ -47,7 +64,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header-content {
@@ -103,7 +120,7 @@ body {
 }
 
 .nav-item:hover {
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .dropdown-arrow {
@@ -129,7 +146,7 @@ body {
 }
 
 .dropdown-toggle:hover {
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .dropdown.active .dropdown-arrow {
@@ -193,16 +210,16 @@ body {
 
 .search-input {
     padding: 4px 8px;
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 3px;
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     color: var(--header-text);
     font-size: 12px;
     width: 150px;
 }
 
 .search-input::placeholder {
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .search-container {
@@ -211,9 +228,9 @@ body {
 
 .language-select {
     padding: 4px 8px;
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 3px;
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     color: var(--header-text);
     font-size: 12px;
 }
@@ -225,10 +242,10 @@ body {
 
 .theme-toggle {
     padding: 4px 8px;
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 3px;
     cursor: pointer;
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     color: var(--header-text);
     font-size: 12px;
 }
@@ -405,8 +422,8 @@ body {
     border: 1px solid var(--border-primary);
 }
 
-.nav li.category > span,
-.nav li.subcategory > span {
+.nav li.category>span,
+.nav li.subcategory>span {
     font-weight: bold;
     display: block;
     padding: 0.25rem 0;
@@ -415,8 +432,8 @@ body {
     transition: color 0.2s ease;
 }
 
-.nav li.category > span::before,
-.nav li.subcategory > span::before {
+.nav li.category>span::before,
+.nav li.subcategory>span::before {
     content: '▶ ';
     display: inline-block;
     transition: transform 0.2s ease;
@@ -424,18 +441,18 @@ body {
     margin-right: 0.25rem;
 }
 
-.nav li.category.open > span::before,
-.nav li.subcategory.open > span::before {
+.nav li.category.open>span::before,
+.nav li.subcategory.open>span::before {
     transform: rotate(90deg);
 }
 
-.nav li.category.open > span,
-.nav li.subcategory.open > span {
+.nav li.category.open>span,
+.nav li.subcategory.open>span {
     color: var(--accent-secondary);
 }
 
-.nav li.category > ul,
-.nav li.subcategory > ul {
+.nav li.category>ul,
+.nav li.subcategory>ul {
     margin-left: 1rem;
     margin-top: 0.25rem;
     display: none;
@@ -443,12 +460,12 @@ body {
     transition: all 0.3s ease;
 }
 
-.nav li.category.open > ul,
-.nav li.subcategory.open > ul {
+.nav li.category.open>ul,
+.nav li.subcategory.open>ul {
     display: block;
 }
 
-.nav li.subcategory > span {
+.nav li.subcategory>span {
     font-weight: 600;
     font-size: 0.9rem;
     color: var(--text-muted);
@@ -802,7 +819,7 @@ body {
     .toc-sidebar {
         display: none;
     }
-    
+
     .main-content {
         max-width: calc(100% - 250px);
     }
@@ -815,7 +832,7 @@ body {
         padding: 10px 15px;
         gap: 10px;
     }
-    
+
     .header-nav {
         order: 3;
         width: 100%;
@@ -824,15 +841,15 @@ body {
         gap: 15px;
         margin-top: 10px;
     }
-    
+
     .header-right {
         gap: 10px;
     }
-    
+
     .search-input {
         width: 150px;
     }
-    
+
     .layout {
         flex-direction: column;
     }
@@ -845,15 +862,15 @@ body {
         position: relative;
         max-height: 250px;
     }
-    
+
     .nav-section {
         margin-bottom: 10px;
     }
-    
+
     .nav-section h3 {
         font-size: 12px;
     }
-    
+
     .nav a {
         font-size: 11px;
         padding: 3px 6px;
@@ -876,17 +893,18 @@ body {
     .main-content h3 {
         font-size: 14px;
     }
-    
+
     .content-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
-    
+
     .toc-sidebar {
         display: none;
     }
 }
+
 /* Dr
 eam Language Syntax Highlighting */
 .main-content pre[class*="language-dream"] {
@@ -938,9 +956,9 @@ eam Language Syntax Highlighting */
 /* Make search input more prominent */
 .search-input {
     padding: 6px 12px;
-    border: 1px solid rgba(255,255,255,0.4);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 4px;
-    background-color: rgba(255,255,255,0.15);
+    background-color: rgba(255, 255, 255, 0.15);
     color: var(--header-text);
     font-size: 13px;
     width: 200px;
@@ -949,9 +967,9 @@ eam Language Syntax Highlighting */
 
 .search-input:focus {
     outline: none;
-    background-color: rgba(255,255,255,0.25);
-    border-color: rgba(255,255,255,0.6);
-    box-shadow: 0 0 0 2px rgba(255,255,255,0.1);
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 /* Improve logo styling */
@@ -966,7 +984,7 @@ eam Language Syntax Highlighting */
     justify-content: center;
     font-weight: bold;
     font-size: 16px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo-text {
