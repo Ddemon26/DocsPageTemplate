@@ -1,0 +1,151 @@
+[
+  {
+    "title": "Introduction",
+    "items": [
+      {
+        "title": "Introduction",
+        "path": "docs/introduction.md"
+      }
+    ]
+  },
+  {
+    "title": "Lexical",
+    "items": [
+      {
+        "title": "Source Text",
+        "path": "docs/lexical.md#source-text"
+      },
+      {
+        "title": "Character Set",
+        "path": "docs/lexical.md#character-set"
+      },
+      {
+        "title": "End of File",
+        "path": "docs/lexical.md#end-of-file"
+      },
+      {
+        "title": "End of Line",
+        "path": "docs/lexical.md#end-of-line"
+      },
+      {
+        "title": "White Space",
+        "path": "docs/lexical.md#white-space"
+      },
+      {
+        "title": "Comments",
+        "path": "docs/lexical.md#comments"
+      },
+      {
+        "title": "Tokens",
+        "path": "docs/lexical.md#tokens"
+      },
+      {
+        "title": "Identifiers",
+        "path": "docs/lexical.md#identifiers"
+      },
+      {
+        "title": "String Literals",
+        "path": "docs/lexical.md#string-literals"
+      },
+      {
+        "title": "Wysiwyg Strings",
+        "path": "docs/lexical.md#wysiwyg-strings"
+      },
+      {
+        "title": "Double Quoted Strings",
+        "path": "docs/lexical.md#double-quoted-strings"
+      },
+      {
+        "title": "Delimited Strings",
+        "path": "docs/lexical.md#delimited-strings"
+      },
+      {
+        "title": "Token Strings",
+        "path": "docs/lexical.md#token-strings"
+      },
+      {
+        "title": "Hex Strings",
+        "path": "docs/lexical.md#hex-strings"
+      },
+      {
+        "title": "String Postfix",
+        "path": "docs/lexical.md#string-postfix"
+      },
+      {
+        "title": "Character Literals",
+        "path": "docs/lexical.md#character-literals"
+      },
+      {
+        "title": "Integer Literals",
+        "path": "docs/lexical.md#integer-literals"
+      },
+      {
+        "title": "Floating Point Literals",
+        "path": "docs/lexical.md#floating-point-literals"
+      },
+      {
+        "title": "Keywords",
+        "path": "docs/lexical.md#keywords"
+      },
+      {
+        "title": "Special Tokens",
+        "path": "docs/lexical.md#special-tokens"
+      },
+      {
+        "title": "Special Token Sequences",
+        "path": "docs/lexical.md#special-token-sequences"
+      }
+    ]
+  },
+  {
+    "title": "Getting Started",
+    "items": [
+      {
+        "title": "Quick Start",
+        "path": "docs/quick-start.md"
+      },
+      {
+        "title": "Installation",
+        "path": "docs/installation.md"
+      }
+    ]
+  },
+  {
+    "title": "Guides",
+    "items": [
+      {
+        "title": "Basic Usage",
+        "path": "docs/guides/basic-usage.md"
+      },
+      {
+        "title": "Advanced Features",
+        "path": "docs/guides/advanced-features.md"
+      }
+    ]
+  },
+  {
+    "title": "API Reference",
+    "items": [
+      {
+        "title": "API Overview",
+        "path": "docs/api/overview.md"
+      },
+      {
+        "title": "Authentication",
+        "path": "docs/api/authentication.md"
+      },
+      {
+        "title": "Auth Overview",
+        "path": "docs/api/auth/overview.md"
+      },
+      {
+        "title": "OAuth 2.0",
+        "path": "docs/api/auth/oauth.md"
+      },
+      {
+        "title": "API Keys",
+        "path": "docs/api/auth/api-keys.md"
+      }
+    ]
+  }
+]

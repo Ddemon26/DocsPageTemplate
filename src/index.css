@@ -1,0 +1,29 @@
+/* Import base styles */
+@import url('index-base.css');
+
+/* D Programming Language theme CSS variables */
+:root {
+    --header-bg: #b52e31;
+    --header-text: #ffffff;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f8f8;
+    --bg-tertiary: #f0f0f0;
+    --text-primary: #000000;
+    --text-secondary: #333333;
+    --text-muted: #666666;
+    --accent-primary: #b52e31;
+    --accent-secondary: #8b2225;
+    --accent-light: #f5e6e6;
+    --accent-lighter: #faf0f0;
+    --border-primary: #cccccc;
+    --border-secondary: #e0e0e0;
+    --shadow-light: rgba(0,0,0,0.1);
+    --error-bg: #fff5f5;
+    --error-border: #fed7d7;
+    --error-text: #c53030;
+    --error-text-secondary: #742a2a;
+    --theme-toggle-bg: #b52e31;
+    --theme-toggle-text: #ffffff;
+    --sidebar-bg: #f8f8f8;
+    --toc-bg: #ffffff;
+}

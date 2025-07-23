@@ -1,0 +1,45 @@
+// Hello World in Dream Language (.dr)
+// This is a simple example of Dream syntax
+
+dream main() {
+    // Print a greeting to the console
+    print("Hello, Dream World!");
+    
+    // Variables in Dream
+    let message: string = "Welcome to Dream Programming Language";
+    let version: number = 1.0;
+    
+    // Display the message
+    print(message);
+    print("Version: " + version);
+    
+    // Dream supports modern syntax
+    let numbers: array<number> = [1, 2, 3, 4, 5];
+    
+    // Iterate through the array
+    for num in numbers {
+        print("Number: " + num);
+    }
+    
+    return 0;
+}
+
+// Function definition in Dream
+dream greet(name: string) -> string {
+    return "Hello, " + name + "!";
+}
+
+// Class definition
+class Person {
+    name: string;
+    age: number;
+    
+    dream constructor(name: string, age: number) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    dream introduce() -> string {
+        return "Hi, I'm " + this.name + " and I'm " + this.age + " years old.";
+    }
+}
