@@ -30,3 +30,17 @@
     --syntax-function: #c084fc;
     --syntax-number: #60a5fa;
 }
+
+/* Fix for text rendering in dark mode */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    text-shadow: none;
+}
+
+/* Ensure code blocks have clean text rendering */
+.main-content pre code {
+    text-shadow: none;
+    font-weight: normal;
+}
