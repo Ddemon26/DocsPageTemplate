@@ -1,6 +1,6 @@
 /* Base CSS Variables - Override these in theme files */
 :root {
-    --header-bg: #b52e31;
+    --header-bg: #2563eb;
     --header-text: #ffffff;
     --bg-primary: #ffffff;
     --bg-secondary: #f8f8f8;
@@ -8,10 +8,10 @@
     --text-primary: #000000;
     --text-secondary: #333333;
     --text-muted: #666666;
-    --accent-primary: #b52e31;
-    --accent-secondary: #8b2225;
-    --accent-light: #f5e6e6;
-    --accent-lighter: #faf0f0;
+    --accent-primary: #2563eb;
+    --accent-secondary: #1d4ed8;
+    --accent-light: #dbeafe;
+    --accent-lighter: #eff6ff;
     --border-primary: #cccccc;
     --border-secondary: #e0e0e0;
     --shadow-light: rgba(0,0,0,0.1);
@@ -19,7 +19,7 @@
     --error-border: #fed7d7;
     --error-text: #c53030;
     --error-text-secondary: #742a2a;
-    --theme-toggle-bg: #b52e31;
+    --theme-toggle-bg: #2563eb;
     --theme-toggle-text: #ffffff;
     --sidebar-bg: #f8f8f8;
     --toc-bg: #ffffff;
