@@ -1,12 +1,12 @@
 {
-  "name": "docspage-template",
-  "version": "1.0.0",
-  "description": "A modern, responsive documentation template with search, navigation, and theming",
+  "name": "{{PROJECT_NAME}}",
+  "version": "{{VERSION}}",
+  "description": "{{PROJECT_DESCRIPTION}}",
   "main": "index.html",
   "bin": {
-    "docspage-init": "./init-template.js",
-    "docspage-setup": "./setup.js",
-    "docspage-cleanup": "./cleanup-template.js"
+    "{{PROJECT_NAME}}-init": "./init-template.js",
+    "{{PROJECT_NAME}}-setup": "./setup.js",
+    "{{PROJECT_NAME}}-cleanup": "./cleanup-template.js"
   },
   "scripts": {
     "init": "node init-template.js",
@@ -18,7 +18,7 @@
     "build": "echo 'No build process needed - static files only'",
     "dist": "node create-template-dist.js",
     "generate": "node template-generator.js",
-    "postinstall": "echo '🚀 DocsPage Template installed! Run: npm run init to get started'"
+    "postinstall": "echo '{{PROJECT_NAME}} installed! Run: npm run init to get started'"
   },
   "keywords": [
     "documentation",
@@ -36,19 +36,19 @@
     "generator"
   ],
   "author": {
-    "name": "DocsPage Template",
-    "email": "support@docspage.dev",
-    "url": "https://docspage.dev"
+    "name": "{{AUTHOR_NAME}}",
+    "email": "{{AUTHOR_EMAIL}}",
+    "url": "{{PROJECT_URL}}"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/docspage/template.git"
+    "url": "{{GITHUB_URL}}.git"
   },
   "bugs": {
-    "url": "https://github.com/docspage/template/issues"
+    "url": "{{GITHUB_URL}}/issues"
   },
-  "homepage": "https://docspage.github.io/template",
+  "homepage": "{{PROJECT_URL}}",
   "engines": {
     "node": ">=14.0.0"
   },

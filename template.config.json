@@ -1,7 +1,7 @@
 {
-  "name": "DocsPage Template",
+  "name": "{{PROJECT_NAME}}",
   "version": "1.0.0",
-  "description": "A modern, responsive documentation template with search, navigation, and theming",
+  "description": "{{PROJECT_DESCRIPTION}}",
   "author": "Template Author",
   "variables": {
     "PROJECT_NAME": "{{PROJECT_NAME}}",

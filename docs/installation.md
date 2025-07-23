@@ -274,10 +274,10 @@ If you encounter issues:
 
 Now that Your Project Name is installed:
 
-- 🚀 **[Quick Start](quick-start.md)** - Get started in 5 minutes
-- 📚 **[Basic Usage](guides/basic-usage.md)** - Learn the fundamentals
-- 🔧 **[Configuration](guides/configuration.md)** - Customize your setup
-- 🌐 **[API Reference](api/overview.md)** - Explore the full API
+- **[Quick Start](quick-start.md)** - Get started in 5 minutes
+- **[Basic Usage](guides/basic-usage.md)** - Learn the fundamentals
+- **[Configuration](guides/configuration.md)** - Customize your setup
+- **[API Reference](api/overview.md)** - Explore the full API
 
 ## Updating
 

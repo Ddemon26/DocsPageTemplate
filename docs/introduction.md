@@ -8,11 +8,11 @@
 
 ## Key Features
 
-- ✨ **Feature 1**: [Describe your main feature]
-- 🚀 **Feature 2**: [Describe another key feature]
-- 🔧 **Feature 3**: [Describe a third feature]
-- 📱 **Cross-Platform**: [If applicable, mention platform support]
-- 🔒 **Secure**: [If applicable, mention security features]
+- **Feature 1**: [Describe your main feature]
+- **Feature 2**: [Describe another key feature]
+- **Feature 3**: [Describe a third feature]
+- **Cross-Platform**: [If applicable, mention platform support]
+- **Secure**: [If applicable, mention security features]
 
 ## Quick Overview
 
@@ -75,10 +75,10 @@ console.log('Result:', result);
 
 Join our growing community:
 
-- 🐛 **[Report Issues]({{GITHUB_URL}}/issues)** - Found a bug? Let us know!
-- 💬 **[Discussions]({{GITHUB_URL}}/discussions)** - Ask questions and share ideas
-- 🤝 **[Contributing]({{GITHUB_URL}}/blob/main/CONTRIBUTING.md)** - Help make {{PROJECT_NAME}} better
-- 📧 **[Contact](mailto:{{AUTHOR_EMAIL}})** - Reach out to the maintainers
+- **[Report Issues]({{GITHUB_URL}}/issues)** - Found a bug? Let us know!
+- **[Discussions]({{GITHUB_URL}}/discussions)** - Ask questions and share ideas
+- **[Contributing]({{GITHUB_URL}}/blob/main/CONTRIBUTING.md)** - Help make {{PROJECT_NAME}} better
+- **[Contact](mailto:{{AUTHOR_EMAIL}})** - Reach out to the maintainers
 
 ## What's Next?
 

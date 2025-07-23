@@ -326,7 +326,7 @@ Update \`template.config.json\`:
   "variables": {
     "PROJECT_NAME": "Your Project",
     "PRIMARY_COLOR": "#your-color",
-    "PROJECT_LOGO": "🎯"
+    "PROJECT_LOGO": "Logo"
   }
 }
 \`\`\`

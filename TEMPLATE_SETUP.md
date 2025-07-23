@@ -84,7 +84,7 @@ Edit `template.config.json` with your project details. This file contains all th
   "variables": {
     "PROJECT_NAME": "My Awesome Project",
     "PROJECT_DESCRIPTION": "A revolutionary tool that changes everything",
-    "PROJECT_LOGO": "🚀",
+    "PROJECT_LOGO": "Logo",
     "PROJECT_LOGO_TEXT": "Awesome Project",
     "SITE_TITLE": "My Awesome Project Documentation",
     "GITHUB_URL": "https://github.com/myusername/my-project",
@@ -109,7 +109,7 @@ Edit `template.config.json` with your project details. This file contains all th
 **Key Variables Explained:**
 - `PROJECT_NAME` - Your project's name (used in titles and text)
 - `PROJECT_DESCRIPTION` - Brief description of what your project does
-- `PROJECT_LOGO` - Emoji or text logo for your project
+- `PROJECT_LOGO` - Text or symbol logo for your project
 - `SITE_TITLE` - HTML title for your documentation site
 - `GITHUB_URL` - Full URL to your GitHub repository
 - `PRIMARY_COLOR` - Main brand color (used in CSS)

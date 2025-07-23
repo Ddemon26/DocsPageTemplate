@@ -173,7 +173,7 @@ class TemplateSetup {
     }
 
     run() {
-        console.log('🚀 DocsPage Template Setup');
+        console.log('{{PROJECT_NAME}} Template Setup');
         console.log('==========================\n');
         
         // Validate configuration

@@ -6,7 +6,7 @@
   "variables": {
     "PROJECT_NAME": "React Component Library",
     "PROJECT_DESCRIPTION": "A comprehensive collection of reusable React components for modern web applications",
-    "PROJECT_LOGO": "⚛️",
+    "PROJECT_LOGO": "Logo",
     "PROJECT_LOGO_TEXT": "React Components",
     "SITE_TITLE": "React Component Library Documentation",
     "GITHUB_URL": "https://github.com/mycompany/react-components",

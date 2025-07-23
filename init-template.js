@@ -118,7 +118,7 @@ class TemplateInitializer {
     }
 
     async collectProjectInfo() {
-        console.log('🚀 DocsPage Template Initialization');
+        console.log('DocsPage Template Initialization');
         console.log('====================================\n');
         console.log('Let\'s set up your documentation project!\n');
 
@@ -148,7 +148,7 @@ class TemplateInitializer {
         }
 
         // Project details
-        this.config.PROJECT_LOGO = await this.askQuestion('Project logo (emoji or text)', this.getProjectEmoji(projectType));
+        this.config.PROJECT_LOGO = await this.askQuestion('Project logo (text or symbol)', 'Logo');
         this.config.PROJECT_LOGO_TEXT = await this.askQuestion('Logo text', this.config.PROJECT_NAME);
         this.config.SITE_TITLE = await this.askQuestion('Site title', `${this.config.PROJECT_NAME} Documentation`);
         this.config.VERSION = await this.askQuestion('Initial version', '1.0.0');
@@ -193,23 +193,15 @@ class TemplateInitializer {
     }
 
     getProjectEmoji(projectType) {
-        const emojis = {
-            'web-app': '🌐',
-            'library': '📦',
-            'api': '🔌',
-            'cli': '⚡',
-            'mobile': '📱',
-            'desktop': '🖥️',
-            'other': '🚀'
-        };
-        return emojis[projectType] || '🚀';
+        // Return simple text logo instead of emojis
+        return 'Logo';
     }
 
     createConfigFile() {
         const configTemplate = {
-            name: "DocsPage Template",
+            name: "{{PROJECT_NAME}}",
             version: "1.0.0",
-            description: "A modern, responsive documentation template with search, navigation, and theming",
+            description: "{{PROJECT_DESCRIPTION}}",
             author: "Template Author",
             variables: this.config,
             placeholders: {
@@ -275,7 +267,7 @@ class TemplateInitializer {
         console.log('      • Live reload: npx live-server');
         console.log('   5. Deploy to GitHub Pages, Netlify, Vercel, or your hosting platform');
         console.log('   6. Optional: Clean up template files with "node cleanup-template.js --confirm"');
-        console.log('\n💡 Pro tip: Check out TEMPLATE_SETUP.md for detailed instructions!');
+        console.log('\nPro tip: Check out TEMPLATE_SETUP.md for detailed instructions!');
     }
 
     async run() {
@@ -285,7 +277,7 @@ class TemplateInitializer {
             this.showSummary();
             this.showNextSteps();
         } catch (error) {
-            console.error('❌ Error during initialization:', error.message);
+            console.error('Error during initialization:', error.message);
         } finally {
             this.rl.close();
         }

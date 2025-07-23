@@ -9,15 +9,15 @@ DocsPage Template is a modern, responsive documentation template that you can dr
 ### Key Features
 
 - 📱 **Responsive Design** - Works perfectly on desktop, tablet, and mobile
-- 🔍 **Full-Text Search** - Find content instantly across all documentation
-- 🌙 **Dark/Light Themes** - Toggle between themes for comfortable reading
-- 📚 **Smart Navigation** - Hierarchical navigation with breadcrumbs
-- 🎨 **Customizable Branding** - Easy to brand with your project colors and logo
-- ⚡ **Fast Rendering** - Markdown rendering with syntax highlighting
-- 📖 **Auto Table of Contents** - Generated automatically from headings
-- 🔗 **Deep Linking** - Direct links to any section
-- 🚀 **Zero Build Process** - Just HTML, CSS, and JavaScript
-- 📄 **GitHub Pages Ready** - Deploy instantly to GitHub Pages
+- **Full-Text Search** - Find content instantly across all documentation
+- **Dark/Light Themes** - Toggle between themes for comfortable reading
+- **Smart Navigation** - Hierarchical navigation with breadcrumbs
+- **Customizable Branding** - Easy to brand with your project colors and logo
+- **Fast Rendering** - Markdown rendering with syntax highlighting
+- **Auto Table of Contents** - Generated automatically from headings
+- **Deep Linking** - Direct links to any section
+- **Zero Build Process** - Just HTML, CSS, and JavaScript
+- **GitHub Pages Ready** - Deploy instantly to GitHub Pages
 
 ## Quick Setup (5 Minutes)
 
@@ -137,37 +137,37 @@ npx live-server
 
 ```
 docspage-template/
-├── 📄 index.html              # Main application entry point
-├── ⚙️ template.config.json    # Your project configuration
-├── 🔧 init-template.js       # Interactive setup script
-├── 🔧 setup.js               # Template setup script
-├── 🧹 cleanup-template.js    # Template cleanup script
-├── 📖 TEMPLATE_SETUP.md      # Detailed setup guide
-├── 📝 README.md              # Project documentation
-├── 📝 GETTING_STARTED.md     # This file
-├── 📁 docs/                  # Your documentation content
-│   ├── 🧭 navigation.json    # Site navigation structure
-│   ├── 👋 introduction.md    # Project introduction
-│   ├── 🔧 installation.md    # Installation guide
-│   ├── ⚡ quick-start.md     # Quick start tutorial
-│   ├── 📚 guides/           # User guides
+├── index.html              # Main application entry point
+├── template.config.json    # Your project configuration
+├── init-template.js       # Interactive setup script
+├── setup.js               # Template setup script
+├── cleanup-template.js    # Template cleanup script
+├── TEMPLATE_SETUP.md      # Detailed setup guide
+├── README.md              # Project documentation
+├── GETTING_STARTED.md     # This file
+├── docs/                  # Your documentation content
+│   ├── navigation.json    # Site navigation structure
+│   ├── introduction.md    # Project introduction
+│   ├── installation.md    # Installation guide
+│   ├── quick-start.md     # Quick start tutorial
+│   ├── guides/           # User guides
 │   │   ├── basic-usage.md
 │   │   ├── configuration.md
 │   │   └── troubleshooting.md
-│   ├── 🔌 api/              # API documentation
+│   ├── api/              # API documentation
 │   │   ├── overview.md
 │   │   ├── authentication.md
 │   │   └── endpoints.md
-│   ├── 💡 examples/         # Code examples
-│   └── 🤝 community/        # Community resources
-└── 📁 src/                   # Application source code
-    ├── 🎯 app.js            # Main application logic
-    ├── 🧠 DocsApp.js        # Core documentation app
-    ├── 📦 managers/         # Feature managers
+│   ├── examples/         # Code examples
+│   └── community/        # Community resources
+└── src/                   # Application source code
+    ├── app.js            # Main application logic
+    ├── DocsApp.js        # Core documentation app
+    ├── managers/         # Feature managers
     │   ├── DocumentManager.js
     │   ├── NavigationManager.js
     │   └── SearchManager.js
-    └── 🎨 *.css             # Styling (base, light, dark themes)
+    └── *.css             # Styling (base, light, dark themes)
 ```
 
 ## Customization
@@ -180,7 +180,7 @@ Update your brand colors and identity:
 {
   "variables": {
     "PROJECT_NAME": "My Awesome Project",
-    "PROJECT_LOGO": "🚀",
+    "PROJECT_LOGO": "Logo",
     "PRIMARY_COLOR": "#007acc",
     "SECONDARY_COLOR": "#f8f9fa",
     "ACCENT_COLOR": "#28a745"
@@ -348,9 +348,9 @@ This removes:
 
 ### Documentation
 
-- 📖 **[Detailed Setup Guide](TEMPLATE_SETUP.md)** - Comprehensive instructions
-- 📝 **[README](README.md)** - Project overview and features
-- 🔧 **Template Configuration** - All available variables and options
+- **[Detailed Setup Guide](TEMPLATE_SETUP.md)** - Comprehensive instructions
+- **[README](README.md)** - Project overview and features
+- **Template Configuration** - All available variables and options
 
 ### Community Support
 
@@ -400,11 +400,11 @@ This removes:
 
 Now that you have the template set up:
 
-1. **🎨 Customize** - Update colors, logo, and branding to match your project
-2. **✍️ Write** - Replace placeholder content with your actual documentation
-3. **🧪 Test** - Preview locally and test all features
-4. **🚀 Deploy** - Share your documentation with the world
-5. **📈 Improve** - Gather feedback and continuously improve
+1. **Customize** - Update colors, logo, and branding to match your project
+2. **Write** - Replace placeholder content with your actual documentation
+3. **Test** - Preview locally and test all features
+4. **Deploy** - Share your documentation with the world
+5. **Improve** - Gather feedback and continuously improve
 
 ## Template Workflow
 

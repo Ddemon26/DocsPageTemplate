@@ -26,13 +26,13 @@ class TemplateCleanup {
     }
 
     confirmCleanup() {
-        console.log('🧹 DocsPage Template Cleanup');
+        console.log('DocsPage Template Cleanup');
         console.log('=============================\n');
         
         console.log('This will remove the following template files:');
         this.filesToRemove.forEach(file => {
             if (fs.existsSync(file)) {
-                console.log(`   ✓ ${file}`);
+                console.log(`   [FOUND] ${file}`);
             } else {
                 console.log(`   - ${file} (not found)`);
             }
@@ -41,13 +41,13 @@ class TemplateCleanup {
         console.log('\nThis will also remove backup folders if they exist:');
         this.foldersToCheck.forEach(folder => {
             if (fs.existsSync(folder)) {
-                console.log(`   ✓ ${folder}/`);
+                console.log(`   [FOUND] ${folder}/`);
             } else {
                 console.log(`   - ${folder}/ (not found)`);
             }
         });
         
-        console.log('\n⚠️  Warning: This action cannot be undone!');
+        console.log('\n[WARNING] This action cannot be undone!');
         console.log('Make sure you have completed the template setup before proceeding.\n');
         
         // In a real interactive environment, you'd use readline
@@ -55,7 +55,7 @@ class TemplateCleanup {
         console.log('To proceed with cleanup, run: node cleanup-template.js --confirm');
         
         if (!process.argv.includes('--confirm')) {
-            console.log('\n💡 Add --confirm flag to actually perform the cleanup.');
+            console.log('\n[INFO] Add --confirm flag to actually perform the cleanup.');
             return false;
         }
         
@@ -201,7 +201,7 @@ class TemplateCleanup {
         console.log('   • Template files have been removed');
         console.log('   • README.md has been cleaned up');
         console.log('   • .gitignore has been updated');
-        console.log('\n🎉 Your documentation site is ready to use!');
+        console.log('\nYour documentation site is ready to use!');
     }
 }
 
