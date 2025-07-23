@@ -4,17 +4,17 @@ class DocsApp {
         this.docs = new Map();
         this.navigation = [];
         this.searchIndex = [];
-        
+
         this.initializeApp();
     }
-    
+
     async initializeApp() {
         this.applyTheme();
         await this.loadNavigation();
         this.setupEventListeners();
         this.handleInitialRoute();
     }
-    
+
     async loadNavigation() {
         try {
             // Try to load navigation from docs/navigation.json
@@ -25,7 +25,7 @@ class DocsApp {
                 // Fallback: scan for markdown files
                 await this.scanForMarkdownFiles();
             }
-            
+
             this.renderNavigation();
             this.buildSearchIndex();
         } catch (error) {
@@ -34,7 +34,7 @@ class DocsApp {
             this.renderNavigation();
         }
     }
-    
+
     async scanForMarkdownFiles() {
         // Dream Programming Language navigation structure
         this.navigation = [
@@ -93,22 +93,45 @@ class DocsApp {
                 items: [
                     { title: "Hello World (.dr)", path: "docs/other-page.md" }
                 ]
+            },
+            {
+                title: "Community",
+                items: [
+                    { title: "Community Hub", path: "docs/community/index.md" },
+                    { title: "Discussion Forums", path: "docs/community/forums.md" },
+                    { title: "Chat & Support", path: "docs/community/chat.md" },
+                    { title: "Events & Meetups", path: "docs/community/events.md" },
+                    { title: "Community Guidelines", path: "docs/community/guidelines.md" },
+                    { title: "Contributing", path: "docs/community/contributing.md" }
+                ]
+            },
+            {
+                title: "Resources",
+                items: [
+                    { title: "All Resources", path: "docs/resources/index.md" }
+                ]
+            },
+            {
+                title: "Downloads",
+                items: [
+                    { title: "Latest Release", path: "docs/downloads/index.md" }
+                ]
             }
         ];
     }
-    
+
     renderNavigation() {
         const nav = document.getElementById('navigation');
         nav.innerHTML = '';
-        
+
         this.navigation.forEach(section => {
             const sectionDiv = document.createElement('div');
             sectionDiv.className = 'nav-section';
-            
+
             const sectionTitle = document.createElement('h3');
             sectionTitle.textContent = section.title;
             sectionDiv.appendChild(sectionTitle);
-            
+
             const ul = document.createElement('ul');
             section.items.forEach(item => {
                 const li = document.createElement('li');
@@ -123,12 +146,12 @@ class DocsApp {
                 li.appendChild(a);
                 ul.appendChild(li);
             });
-            
+
             sectionDiv.appendChild(ul);
             nav.appendChild(sectionDiv);
         });
     }
-    
+
     buildSearchIndex() {
         this.searchIndex = [];
         this.navigation.forEach(section => {
@@ -141,43 +164,95 @@ class DocsApp {
             });
         });
     }
-    
+
     setupEventListeners() {
         const searchInput = document.getElementById('search-input');
         const searchResults = document.getElementById('search-results');
-        
+
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase().trim();
-            
+
             if (query.length === 0) {
                 searchResults.style.display = 'none';
                 return;
             }
-            
-            const results = this.searchIndex.filter(item => 
+
+            const results = this.searchIndex.filter(item =>
                 item.title.toLowerCase().includes(query) ||
                 item.section.toLowerCase().includes(query)
             );
-            
+
             this.renderSearchResults(results, searchResults);
         });
-        
+
         // Hide search results when clicking outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.search-container')) {
                 searchResults.style.display = 'none';
             }
         });
-        
+
         // Handle browser back/forward
         window.addEventListener('popstate', () => {
             this.handleInitialRoute();
         });
+
+        // Setup dropdown functionality
+        this.setupDropdowns();
     }
-    
+
+    setupDropdowns() {
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            const menu = dropdown.querySelector('.dropdown-menu');
+
+            if (toggle && menu) {
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Close other dropdowns
+                    dropdowns.forEach(otherDropdown => {
+                        if (otherDropdown !== dropdown) {
+                            otherDropdown.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle current dropdown
+                    dropdown.classList.toggle('active');
+                });
+
+                // Handle dropdown item clicks
+                const dropdownItems = menu.querySelectorAll('.dropdown-item');
+                dropdownItems.forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        const href = item.getAttribute('href');
+                        if (href && href.startsWith('#docs/')) {
+                            e.preventDefault();
+                            const path = href.substring(1);
+                            this.loadDoc(path);
+                            dropdown.classList.remove('active');
+                        }
+                    });
+                });
+            }
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.dropdown')) {
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            }
+        });
+    }
+
     renderSearchResults(results, container) {
         container.innerHTML = '';
-        
+
         if (results.length === 0) {
             const noResults = document.createElement('div');
             noResults.className = 'no-results';
@@ -196,17 +271,17 @@ class DocsApp {
                 container.appendChild(div);
             });
         }
-        
+
         container.style.display = 'block';
     }
-    
+
     async loadDoc(path) {
         const content = document.getElementById('content');
         content.innerHTML = '<div class="loading">Loading...</div>';
-        
+
         try {
             let docContent;
-            
+
             // Check if already cached
             if (this.docs.has(path)) {
                 docContent = this.docs.get(path);
@@ -218,28 +293,28 @@ class DocsApp {
                 docContent = await response.text();
                 this.docs.set(path, docContent);
             }
-            
+
             // Parse and render markdown
             const html = marked.parse(docContent);
             const sanitizedHtml = DOMPurify.sanitize(html);
-            
+
             content.innerHTML = sanitizedHtml;
-            
+
             // Apply Dream language syntax highlighting
             this.highlightDreamCode();
-            
+
             // Add copy buttons to code blocks
             this.addCopyButtons();
-            
+
             // Generate table of contents
             this.generateTableOfContents();
-            
+
             // Update breadcrumbs
             this.updateBreadcrumbs(path);
-            
+
             // Update URL
             history.pushState({ path }, '', `#${path}`);
-            
+
         } catch (error) {
             console.error('Error loading document:', error);
             content.innerHTML = `
@@ -252,7 +327,7 @@ class DocsApp {
             `;
         }
     }
-    
+
     highlightDreamCode() {
         // Find all code blocks with Dream language
         const dreamCodeBlocks = document.querySelectorAll('code[class*="language-dream"], pre code');
@@ -261,34 +336,34 @@ class DocsApp {
                 // Add Dream language class
                 block.className = 'language-dream';
                 block.parentElement.className = 'language-dream';
-                
+
                 // Simple syntax highlighting for Dream
                 let html = block.innerHTML;
-                
+
                 // Highlight Dream keywords
                 const keywords = ['dream', 'let', 'const', 'if', 'else', 'for', 'while', 'class', 'return', 'new', 'this', 'in'];
                 keywords.forEach(keyword => {
                     const regex = new RegExp(`\\b${keyword}\\b`, 'g');
                     html = html.replace(regex, `<span class="token keyword">${keyword}</span>`);
                 });
-                
+
                 // Highlight strings
                 html = html.replace(/"([^"]*)"/g, '<span class="token string">"$1"</span>');
-                
+
                 // Highlight comments
                 html = html.replace(/\/\/([^\n]*)/g, '<span class="token comment">//$1</span>');
-                
+
                 // Highlight numbers
                 html = html.replace(/\b(\d+\.?\d*)\b/g, '<span class="token number">$1</span>');
-                
+
                 // Highlight function names
                 html = html.replace(/(\w+)\s*\(/g, '<span class="token function">$1</span>(');
-                
+
                 block.innerHTML = html;
             }
         });
     }
-    
+
     addCopyButtons() {
         const codeBlocks = document.querySelectorAll('pre');
         codeBlocks.forEach(block => {
@@ -309,51 +384,51 @@ class DocsApp {
             block.appendChild(button);
         });
     }
-    
+
     generateTableOfContents() {
         const toc = document.getElementById('table-of-contents');
         const headings = document.querySelectorAll('#content h1, #content h2, #content h3, #content h4');
-        
+
         if (headings.length === 0) {
             toc.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">No headings found</p>';
             return;
         }
-        
+
         const tocList = document.createElement('ul');
-        
+
         headings.forEach((heading, index) => {
             const level = parseInt(heading.tagName.charAt(1));
             const id = `heading-${index}`;
             heading.id = id;
-            
+
             const li = document.createElement('li');
             const a = document.createElement('a');
             a.href = `#${id}`;
             a.textContent = heading.textContent;
             a.className = `toc-level-${level}`;
-            
+
             a.addEventListener('click', (e) => {
                 e.preventDefault();
                 heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
-            
+
             li.appendChild(a);
             tocList.appendChild(li);
         });
-        
+
         toc.innerHTML = '';
         toc.appendChild(tocList);
     }
-    
+
     updateBreadcrumbs(path) {
         const breadcrumbs = document.getElementById('breadcrumbs');
         const pathParts = path.split('/');
         const fileName = pathParts[pathParts.length - 1].replace('.md', '');
-        
+
         // Find the current item in navigation
         let currentItem = null;
         let currentSection = null;
-        
+
         for (const section of this.navigation) {
             for (const item of section.items) {
                 if (item.path === path) {
@@ -364,7 +439,7 @@ class DocsApp {
             }
             if (currentItem) break;
         }
-        
+
         if (currentSection && currentItem) {
             breadcrumbs.innerHTML = `
                 <span>${currentSection.title}</span>
@@ -375,19 +450,19 @@ class DocsApp {
             breadcrumbs.innerHTML = `<span class="current">${fileName}</span>`;
         }
     }
-    
+
     updateActiveNav(activeLink) {
         // Remove active class from all links
         document.querySelectorAll('.nav a').forEach(link => {
             link.classList.remove('active');
         });
-        
+
         // Add active class to current link
         if (activeLink) {
             activeLink.classList.add('active');
         }
     }
-    
+
     handleInitialRoute() {
         const hash = window.location.hash.substring(1);
         if (hash) {
@@ -405,11 +480,11 @@ class DocsApp {
             }
         }
     }
-    
+
     applyTheme() {
         const themeCSS = document.getElementById('theme-css');
         const themeToggle = document.querySelector('.theme-toggle');
-        
+
         if (this.currentTheme === 'dark') {
             themeCSS.href = 'src/index-dark.css';
             themeToggle.textContent = '☀️';
