@@ -1,0 +1,98 @@
+{
+  "name": "docspage-template",
+  "version": "1.0.0",
+  "description": "A modern, responsive documentation template with search, navigation, and theming",
+  "main": "index.html",
+  "bin": {
+    "docspage-init": "./init-template.js",
+    "docspage-setup": "./setup.js",
+    "docspage-cleanup": "./cleanup-template.js"
+  },
+  "scripts": {
+    "init": "node init-template.js",
+    "setup": "node setup.js",
+    "cleanup": "node cleanup-template.js",
+    "test": "node test-template.js",
+    "serve": "npx http-server -p 8080 -c-1",
+    "dev": "npx live-server --port=8080 --no-browser",
+    "build": "echo 'No build process needed - static files only'",
+    "dist": "node create-template-dist.js",
+    "generate": "node template-generator.js",
+    "postinstall": "echo '🚀 DocsPage Template installed! Run: npm run init to get started'"
+  },
+  "keywords": [
+    "documentation",
+    "template",
+    "markdown",
+    "static-site",
+    "github-pages",
+    "responsive",
+    "search",
+    "dark-theme",
+    "netlify",
+    "vercel",
+    "docs",
+    "website",
+    "generator"
+  ],
+  "author": {
+    "name": "DocsPage Template",
+    "email": "support@docspage.dev",
+    "url": "https://docspage.dev"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/docspage/template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/docspage/template/issues"
+  },
+  "homepage": "https://docspage.github.io/template",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "index.html",
+    "src/",
+    "docs/",
+    "*.js",
+    "*.md",
+    "template.config.example.json",
+    ".gitignore",
+    ".gitattributes",
+    "LICENSE"
+  ],
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  },
+  "templateConfig": {
+    "supportedProjectTypes": [
+      "web-app",
+      "library", 
+      "api",
+      "cli",
+      "mobile",
+      "desktop",
+      "other"
+    ],
+    "features": [
+      "responsive-design",
+      "full-text-search",
+      "dark-light-themes",
+      "smart-navigation",
+      "customizable-branding",
+      "markdown-rendering",
+      "syntax-highlighting",
+      "zero-build-process",
+      "github-pages-ready"
+    ],
+    "deploymentTargets": [
+      "github-pages",
+      "netlify",
+      "vercel",
+      "traditional-hosting"
+    ]
+  }
+}

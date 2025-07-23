@@ -1,0 +1,51 @@
+{
+  "name": "DocsPage Template",
+  "version": "1.0.0",
+  "description": "A modern, responsive documentation template with search, navigation, and theming",
+  "author": "Template Author",
+  "variables": {
+    "PROJECT_NAME": "React Component Library",
+    "PROJECT_DESCRIPTION": "A comprehensive collection of reusable React components for modern web applications",
+    "PROJECT_LOGO": "⚛️",
+    "PROJECT_LOGO_TEXT": "React Components",
+    "SITE_TITLE": "React Component Library Documentation",
+    "GITHUB_URL": "https://github.com/mycompany/react-components",
+    "GITHUB_USERNAME": "mycompany",
+    "GITHUB_REPO": "react-components",
+    "PROJECT_URL": "https://react-components.dev",
+    "API_BASE_URL": "https://api.react-components.dev",
+    "PRIMARY_COLOR": "#61dafb",
+    "SECONDARY_COLOR": "#f7f9fc",
+    "ACCENT_COLOR": "#20232a",
+    "AUTHOR_NAME": "React Team",
+    "AUTHOR_EMAIL": "team@react-components.dev",
+    "LICENSE": "MIT",
+    "VERSION": "2.1.0",
+    "INSTALL_COMMAND": "npm install @mycompany/react-components",
+    "RUN_COMMAND": "npx create-react-app my-app",
+    "MAIN_LANGUAGE": "JavaScript",
+    "RUNTIME_REQUIREMENT": "React 17+, Node.js 16+"
+  },
+  "placeholders": {
+    "docs": {
+      "introduction.md": "Component library overview, design philosophy, and getting started",
+      "installation.md": "NPM installation, CDN setup, and framework integration",
+      "quick-start.md": "First component implementation and basic usage",
+      "api/overview.md": "Component API reference and prop documentation",
+      "guides/basic-usage.md": "Basic component usage patterns and examples",
+      "guides/theming.md": "Theming system and customization options",
+      "examples/index.md": "Live examples and code snippets for each component"
+    }
+  },
+  "setup": {
+    "steps": [
+      "1. Copy template.config.example.json to template.config.json",
+      "2. Update all variables with your project details",
+      "3. Run 'node setup.js' to apply template variables",
+      "4. Update docs/navigation.json with your documentation structure",
+      "5. Replace all placeholder content in docs/ folder",
+      "6. Customize colors and branding in CSS files",
+      "7. Test locally and deploy to your hosting platform"
+    ]
+  }
+}

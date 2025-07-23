@@ -1,0 +1,12 @@
+# NPM ignore file
+node_modules/
+.git/
+.github/
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.tmp
+*.temp
+.template-backup/

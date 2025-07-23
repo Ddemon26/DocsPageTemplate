@@ -1,93 +1,130 @@
-# Your Project Name Documentation
+# DocsPage Template
 
-A brief description of what your project does and why it's useful
+> **A modern, responsive documentation template that you can drop into any project to create beautiful documentation sites.**
 
-> **This is a DocsPage Template** - A modern, responsive documentation template that you can drop into any project to create beautiful documentation sites. Built with vanilla JavaScript and designed to work seamlessly with GitHub Pages.
+[![GitHub Template](https://img.shields.io/badge/GitHub-Use%20Template-brightgreen)](https://github.com/docspage/template/generate)
+[![npm](https://img.shields.io/npm/v/docspage-template)](https://www.npmjs.com/package/docspage-template)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## ✨ Template Features
+Built with vanilla JavaScript and designed to work seamlessly with GitHub Pages, Netlify, Vercel, and any static hosting platform.
+
+## ✨ Features
 
 - 📱 **Responsive Design** - Works perfectly on desktop, tablet, and mobile
 - 🔍 **Full-Text Search** - Find content instantly across all documentation
-- 🌙 **Dark/Light Themes** - Toggle between themes for comfortable reading
+- 🌙 **Dark/Light Themes** - Toggle between themes with system preference detection
 - 📚 **Smart Navigation** - Hierarchical navigation with breadcrumbs
 - 🎨 **Customizable Branding** - Easy to brand with your project colors and logo
 - ⚡ **Fast Rendering** - Markdown rendering with syntax highlighting
 - 📖 **Auto Table of Contents** - Generated automatically from headings
 - 🔗 **Deep Linking** - Direct links to any section
 - 🚀 **Zero Build Process** - Just HTML, CSS, and JavaScript
-- 📄 **GitHub Pages Ready** - Deploy instantly to GitHub Pages
+- 📄 **Deploy Ready** - GitHub Pages, Netlify, Vercel compatible
+- 🎯 **Project Type Aware** - Adapts to web apps, libraries, APIs, CLI tools, and more
 
-## 🚀 Using This Template
+## 🚀 Quick Start
 
-### 1. Get the Template
+### Option 1: Use as GitHub Template (Recommended)
 
-**Option A: Use as Template (Recommended)**
-1. Click "Use this template" on the [DocsPage Template repository](https://github.com/docspage/template)
-2. Create your new repository
-3. Clone it locally
-
-**Option B: Download & Copy**
-1. Download the template ZIP file
-2. Extract to your project folder
-3. Initialize git if needed: `git init`
-
-**Option C: Add to Existing Project**
-1. Copy all template files to your project root
-2. Merge with existing files as needed
-
-### 2. Configure Your Project
-
-Edit `template.config.json` with your project details:
-
-```json
-{
-  "variables": {
-    "PROJECT_NAME": "Your Project Name",
-    "PROJECT_DESCRIPTION": "A brief description of what your project does and why it's useful",
-    "PROJECT_LOGO": "🚀",
-    "SITE_TITLE": "Your Project Documentation",
-    "GITHUB_URL": "https://github.com/yourusername/yourproject",
-    "AUTHOR_NAME": "Your Name",
-    "PRIMARY_COLOR": "#007acc"
-  }
-}
-```
-
-### 3. Run Setup
+1. **Click "Use this template"** button above
+2. **Create your new repository**
+3. **Clone it locally**
+4. **Run the interactive setup:**
 
 ```bash
+node init-template.js  # Interactive configuration
+node setup.js         # Apply your settings
+```
+
+### Option 2: npm Installation
+
+```bash
+npm install docspage-template
+cd node_modules/docspage-template
+npm run init  # Interactive setup
+npm run setup # Apply configuration
+```
+
+### Option 3: Direct Download
+
+1. **Download** this repository as ZIP
+2. **Extract** to your project folder
+3. **Run setup scripts**
+
+### Option 4: Add to Existing Project
+
+```bash
+# Clone into your project
+git clone https://github.com/docspage/template.git docs-template
+cd docs-template
+
+# Configure for your project
+node init-template.js
 node setup.js
+
+# Copy to your project root
+cp -r * ../
+cd .. && rm -rf docs-template
 ```
 
-This will replace all template variables throughout your files with your actual project information.
+## 🎯 Interactive Setup
 
-### 4. Add Your Content
+The `init-template.js` script provides an intelligent setup experience:
 
-Replace the placeholder files in `docs/` with your actual documentation:
+### Project Type Detection
+Choose from optimized configurations:
+- 🌐 **Web Application** - Frontend apps, SPAs
+- 📦 **Library/Package** - npm packages, SDKs  
+- 🔌 **API/Backend** - REST APIs, microservices
+- ⚡ **CLI Tool** - Command line utilities
+- 📱 **Mobile App** - React Native, Flutter
+- 🖥️ **Desktop App** - Electron, native apps
+
+### Smart Defaults
+Based on your project type, get intelligent defaults for:
+- Installation commands
+- Runtime requirements
+- Memory and storage needs
+- Package manager preferences
+- Code examples and snippets
+
+### Complete Configuration
+The setup covers everything:
+- Project branding and colors
+- GitHub repository details
+- Technical specifications
+- Documentation structure
+- Deployment settings
+
+## 📋 What You Get
+
+After setup, your project will have:
 
 ```
-docs/
-├── introduction.md          # Your project overview
-├── installation.md          # How to install/setup
-├── quick-start.md          # Getting started guide
-├── guides/                 # User guides
-│   ├── basic-usage.md
-│   ├── configuration.md
-│   └── advanced-features.md
-├── api/                    # API documentation
-│   ├── overview.md
-│   ├── authentication.md
-│   └── endpoints.md
-├── examples/               # Code examples
-│   └── index.md
-└── community/              # Community docs
-    ├── contributing.md
-    └── support.md
+your-project/
+├── 📄 index.html              # Main documentation app
+├── ⚙️ template.config.json    # Your project configuration  
+├── 📁 docs/                  # Your documentation content
+│   ├── 🧭 navigation.json    # Site navigation structure
+│   ├── 📝 introduction.md    # Project introduction
+│   ├── 🔧 installation.md    # Installation guide
+│   ├── ⚡ quick-start.md     # Quick start tutorial
+│   ├── 📚 guides/           # User guides
+│   ├── 🔌 api/              # API documentation
+│   ├── 💡 examples/         # Code examples
+│   └── 🤝 community/        # Community resources
+└── 📁 src/                   # Application source code
+    ├── 🎯 app.js            # Main application logic
+    ├── 🧠 DocsApp.js        # Core documentation engine
+    ├── 📦 managers/         # Feature managers
+    └── 🎨 *.css             # Styling (base, light, dark)
 ```
 
-### 5. Update Navigation
+## 🔧 Customization
 
-Edit `docs/navigation.json` to match your documentation structure:
+### Navigation Structure
+
+Edit `docs/navigation.json` for your site structure:
 
 ```json
 [
@@ -95,7 +132,7 @@ Edit `docs/navigation.json` to match your documentation structure:
     "title": "Getting Started",
     "items": [
       {
-        "title": "Introduction",
+        "title": "Introduction", 
         "path": "docs/introduction.md"
       },
       {
@@ -103,22 +140,59 @@ Edit `docs/navigation.json` to match your documentation structure:
         "path": "docs/installation.md"
       }
     ]
+  },
+  {
+    "title": "Advanced",
+    "items": [
+      {
+        "title": "API Reference",
+        "items": [
+          {
+            "title": "Authentication",
+            "path": "docs/api/auth.md"
+          }
+        ]
+      }
+    ]
   }
 ]
 ```
 
-### 6. Deploy
+### Brand Colors & Styling
 
-**GitHub Pages:**
-1. Push to GitHub
-2. Go to Settings → Pages
-3. Select "Deploy from a branch" → "main" → "/ (root)"
-4. Your site will be live at `https://yourusername.github.io/repository-name/`
+Colors are automatically applied from your configuration:
 
-**Other Options:**
-- **Netlify**: Connect your repo and deploy automatically
-- **Vercel**: Import your repository and deploy
-- **Traditional hosting**: Upload all files to your web server
+```json
+{
+  "variables": {
+    "PRIMARY_COLOR": "#007acc",
+    "SECONDARY_COLOR": "#f8f9fa", 
+    "ACCENT_COLOR": "#28a745"
+  }
+}
+```
+
+For advanced styling, modify CSS files in `src/`:
+- `index-base.css` - Core styles and CSS variables
+- `index.css` - Light theme overrides  
+- `index-dark.css` - Dark theme overrides
+
+## 🚀 Deployment
+
+### GitHub Pages (Free & Easy)
+
+1. **Push to GitHub**
+2. **Repository Settings → Pages**
+3. **Source: "Deploy from a branch" → "main" → "/ (root)"**
+4. **Your site: `https://username.github.io/repository-name/`**
+
+### Other Platforms
+
+| Platform | Setup | Custom Domain | SSL | Cost |
+|----------|-------|---------------|-----|------|
+| **Netlify** | Connect repo | ✅ | ✅ | Free tier |
+| **Vercel** | Import repo | ✅ | ✅ | Free tier |
+| **Traditional** | Upload files | ✅ | ✅ | Varies |
 
 ## 📁 Project Structure
 
