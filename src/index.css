@@ -26,4 +26,7 @@
     --theme-toggle-text: #ffffff;
     --sidebar-bg: #f8f8f8;
     --toc-bg: #ffffff;
+    --syntax-string: #22863a;
+    --syntax-function: #6f42c1;
+    --syntax-number: #005cc5;
 }

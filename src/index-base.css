@@ -900,7 +900,7 @@ eam Language Syntax Highlighting */
 }
 
 .main-content code[class*="language-dream"] .token.string {
-    color: #22863a;
+    color: var(--syntax-string);
 }
 
 .main-content code[class*="language-dream"] .token.comment {
@@ -909,25 +909,14 @@ eam Language Syntax Highlighting */
 }
 
 .main-content code[class*="language-dream"] .token.function {
-    color: #6f42c1;
+    color: var(--syntax-function);
 }
 
 .main-content code[class*="language-dream"] .token.number {
-    color: #005cc5;
+    color: var(--syntax-number);
 }
 
-/* Dark theme syntax highlighting */
-:root[data-theme="dark"] .main-content code[class*="language-dream"] .token.string {
-    color: #9ecbff;
-}
 
-:root[data-theme="dark"] .main-content code[class*="language-dream"] .token.function {
-    color: #b392f0;
-}
-
-:root[data-theme="dark"] .main-content code[class*="language-dream"] .token.number {
-    color: #79b8ff;
-}
 
 /* Improve search results positioning */
 .search-results {
